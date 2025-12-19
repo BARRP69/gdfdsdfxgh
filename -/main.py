@@ -3,6 +3,7 @@ from telebot import types
 import os
 import sys
 import io
+from operators import OPERATORS, OPERATOR_IDS
 
 # =======================
 # Налаштування UTF-8 для консолі Windows
@@ -10,15 +11,14 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # =======================
-# Токен та оператор
+# Токен бота
 # =======================
-TOKEN = "8198427037:AAGZrlUfPERhnX6riX3Czu1r8L-Ptw-tD8s"
-OPERATOR_ID = 7968501682
+TOKEN = "8541100573:AAHpQ3mRZngWl_9m9yFfzbv1Q3QdqDUEcfM"
 
 bot = telebot.TeleBot(TOKEN)
 
+# Глобальні змінні
 ticket_counter = 0
-OPERATORS = {OPERATOR_ID: "Артур Потужний"}
 active_chats = {}
 ticket_messages = {}
 canceled_tickets = set()
@@ -76,7 +76,7 @@ def start(message):
 # =======================
 def notify_operators(ticket_id, user_id, username, chat_id, message_id):
     try:
-        for operator_id in OPERATORS.keys():
+        for operator_id in OPERATOR_IDS:
             markup = types.InlineKeyboardMarkup()
             btn_accept = types.InlineKeyboardButton(
                 "✅ Прийняти",
